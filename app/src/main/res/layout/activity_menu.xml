@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/clg"
+    >
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="354dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="9dp"
+        android:backgroundTint="#00494965"
+        android:contentDescription="Menu"
+        android:src="@drawable/ic_baseline_more_vert_24"
+        app:backgroundTint="#00FFFFFF" />
+
+    <Button
+        android:id="@+id/buttonlogout"
+        android:layout_width="83dp"
+        android:layout_height="28dp"
+        android:layout_alignLeft="@+id/buttonviewfaculty"
+        android:layout_marginLeft="264dp"
+        android:layout_marginTop="59dp"
+        android:background="#AB31569F"
+        android:text="Logout"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/buttonClearStudent"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+
+        android:layout_below="@+id/buttonviewfaculty"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="55dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Clear All Students Data" />
+
+    <Button
+        android:id="@+id/buttonClearStudent2"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/buttonClearStudent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="53dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Clear All Faculty Data" />
+
+    <Button
+        android:id="@+id/buttonViewstudent"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/buttonaddstudent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:background="@drawable/roundedbutton"
+        android:text="View student" />
+
+    <Button
+        android:id="@+id/buttonviewfaculty"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+
+        android:layout_below="@+id/buttonaddfaculty"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="57dp"
+        android:background="@drawable/roundedbutton"
+        android:text="View faculty" />
+
+    <Button
+        android:id="@+id/buttonaddfaculty"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/attendancePerStudentButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="57dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Add faculty" />
+
+    <Button
+        android:id="@+id/buttonaddstudent"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="166dp"
+        android:layout_marginEnd="57dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Add student" />
+
+    <Button
+        android:id="@+id/attendancePerStudentButton"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/buttonViewstudent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="55dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Attendance Per Student" />
+
+</RelativeLayout>

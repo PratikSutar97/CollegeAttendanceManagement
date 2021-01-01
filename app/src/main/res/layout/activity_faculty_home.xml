@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/clg"
+    >
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="354dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="9dp"
+        android:backgroundTint="#00494965"
+        android:contentDescription="Menu"
+        android:src="@drawable/ic_baseline_more_vert_24"
+        app:backgroundTint="#00FFFFFF" />
+
+    <Button
+        android:id="@+id/buttonTakeAttendance"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="330dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Take Attendance" />
+
+    <Button
+        android:id="@+id/buttonlogout"
+        android:layout_width="83dp"
+        android:layout_height="28dp"
+        android:layout_alignLeft="@+id/buttonviewfaculty"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="59dp"
+        android:background="#AB31569F"
+        android:text="Logout"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/buttonchangepassword"
+        android:layout_width="157dp"
+        android:layout_height="28dp"
+        android:layout_alignLeft="@+id/buttonviewfaculty"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="102dp"
+        android:background="#AB31569F"
+        android:text="Change Password"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/buttongetstudent"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Get Students By Course Name" />
+
+    <Button
+        android:id="@+id/attendancePerStudentButton"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="410dp"
+        android:background="@drawable/roundedbutton"
+        android:text="View Attendance" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
+        android:text="Welcome, Faculty" />
+
+</RelativeLayout>

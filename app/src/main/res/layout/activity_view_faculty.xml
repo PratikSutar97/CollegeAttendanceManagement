@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/clg"
+    tools:context=".ViewFaculty">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="200dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:text="Faculty List"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <HorizontalScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:layout_marginTop="70dp"
+        android:background="#C30A0A0C"
+        android:fadeScrollbars="false"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarTrackHorizontal="@color/design_default_color_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TableLayout
+                android:id="@+id/table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp">
+                <!--        <TableRow-->
+                <!--            android:layout_width="75dp"-->
+                <!--            android:layout_height="76dp"-->
+
+                <!--            android:layout_marginLeft="0dp"-->
+                <!--            android:layout_marginTop="50dp"-->
+                <!--            android:background="#994143DC">-->
+
+                <!--            <TextView-->
+                <!--                android:layout_width="37dp"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:text="Id."-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+
+                <!--            <TextView-->
+                <!--                android:layout_width="113dp"-->
+                <!--                android:layout_height="49dp"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:text="Name"-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+
+                <!--            <TextView-->
+                <!--                android:layout_width="95dp"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:text="Contact."-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+
+                <!--            <TextView-->
+                <!--                android:layout_width="95dp"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:text="Course."-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+
+                <!--            <TextView-->
+                <!--                android:layout_width="70dp"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:text="Year."-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+                <!--        </TableRow>-->
+                <!--        <TableRow-->
+                <!--            android:layout_width="75dp"-->
+                <!--            android:layout_height="76dp"-->
+
+                <!--            android:layout_marginLeft="0dp"-->
+                <!--            android:layout_marginTop="0dp"-->
+                <!--            android:background="#994143DC">-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/id"-->
+                <!--                android:layout_width="37dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_column="1"-->
+
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/name"-->
+                <!--                android:layout_width="113dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/contact"-->
+                <!--                android:layout_width="95dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/course"-->
+                <!--                android:layout_width="95dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/year"-->
+                <!--                android:layout_width="70dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_column="1"-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textSize="24sp" />-->
+                <!--        </TableRow>-->
+            </TableLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

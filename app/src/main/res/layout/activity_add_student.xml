@@ -1,0 +1,237 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/clg"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="291dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:text="Student Registration"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="550dp"
+        android:fadeScrollbars="false"
+        android:scrollbarTrackVertical="@android:drawable/checkbox_off_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textGeneralInfo"
+                android:layout_width="300dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="20dp"
+                android:text="- - - - Student General Info - - - -"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editTextfirstname"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:autofillHints=""
+                android:background="@drawable/roundedtextview"
+                android:hint=" Enter Full Name"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextcontact"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/roundedtextview"
+                android:hint=" contact"
+                android:inputType="number|phone" />
+
+            <EditText
+                android:id="@+id/editTextaddress"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/roundedtextview"
+                android:hint=" address"
+                android:inputType="text" />
+
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="200dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:text="Select Course"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerCourse"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="28dp"
+                android:background="#938787" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="200dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="30dp"
+                android:text="Select Year"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerYear"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="28dp"
+                android:background="#938787" />
+
+            <TextView
+                android:id="@+id/textSubHead"
+                android:layout_width="200dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="20dp"
+                android:text="- - - - Subjects Info - - - -"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textSub1"
+                android:layout_width="200dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:text="Select Subject1"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSub1"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="28dp"
+                android:background="#938787" />
+
+            <TextView
+                android:id="@+id/textSub2"
+                android:layout_width="200dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="30dp"
+                android:text="Select Subject 2"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSub2"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="28dp"
+                android:background="#938787" />
+
+            <TextView
+                android:id="@+id/textSub3"
+                android:layout_width="200dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:text="Select Subject 3"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSub3"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="28dp"
+                android:background="#938787" />
+
+            <TextView
+                android:id="@+id/textSub4"
+                android:layout_width="200dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="30dp"
+                android:text="Select Subject 4"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSub4"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="28dp"
+                android:background="#938787" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="#F44336"
+        android:fontFamily="monospace"
+        android:text="Cancel"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <Button
+        android:id="@+id/buttonaddstudent"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="#2C77C5"
+        android:fontFamily="monospace"
+        android:text="Add Student"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
