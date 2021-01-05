@@ -3,4 +3,6 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <drawable name="bt_normal_color">#08088A</drawable>
+    <drawable name="bt_press_color">#00BFFF</drawable>
 </resources>

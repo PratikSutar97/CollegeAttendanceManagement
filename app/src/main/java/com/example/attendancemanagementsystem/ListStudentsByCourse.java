@@ -65,6 +65,66 @@ public class ListStudentsByCourse extends AppCompatActivity {
             }
         });
 
+        TableRow tbrow0=new TableRow(this);
+
+        TextView tv0=new TextView(this);
+        tv0.setText("Sr No.");
+        tv0.setTextSize(20);
+        tv0.setGravity(Gravity.CENTER);
+        tv0.setTextColor(Color.WHITE);
+        tbrow0.addView(tv0);
+
+        TextView tv1=new TextView(this);
+        tv1.setText("Name");
+        tv1.setTextSize(20);
+        tv1.setGravity(Gravity.CENTER);
+        tv1.setTextColor(Color.WHITE);
+        tbrow0.addView(tv1);
+
+        TextView tv2=new TextView(this);
+        tv2.setText("Contact");
+        tv2.setTextSize(20);
+        tv2.setGravity(Gravity.CENTER);
+        tv2.setTextColor(Color.WHITE);
+        tbrow0.addView(tv2);
+
+        TextView tv3=new TextView(this);
+        tv3.setText("Course");
+        tv3.setTextSize(20);
+        tv3.setTextColor(Color.WHITE);
+        tv3.setGravity(Gravity.CENTER);
+        tbrow0.addView(tv3);
+
+        TextView tv4=new TextView(this);
+        tv4.setText("Year");
+        tv4.setTextSize(20);
+        tv4.setGravity(Gravity.CENTER);
+        tv4.setTextColor(Color.WHITE);
+        tbrow0.addView(tv4);
+
+        table.addView(tbrow0);
+        TableRow.LayoutParams id= (TableRow.LayoutParams) tv0.getLayoutParams();
+        id.width=ActionBar.LayoutParams.MATCH_PARENT;
+        table.setLayoutParams(id);
+
+        TableRow.LayoutParams name= (TableRow.LayoutParams) tv1.getLayoutParams();
+        name.width=ActionBar.LayoutParams.MATCH_PARENT;
+        name.leftMargin=10;
+        table.setLayoutParams(name);
+
+        TableRow.LayoutParams contact= (TableRow.LayoutParams) tv2.getLayoutParams();
+        contact.width=ActionBar.LayoutParams.MATCH_PARENT;
+        contact.leftMargin=50;
+        table.setLayoutParams(contact);
+
+        TableRow.LayoutParams course= (TableRow.LayoutParams) tv3.getLayoutParams();
+        course.width=ActionBar.LayoutParams.MATCH_PARENT;
+        course.leftMargin=50;
+        table.setLayoutParams(course);
+        TableRow.LayoutParams year= (TableRow.LayoutParams) tv4.getLayoutParams();
+        year.width=ActionBar.LayoutParams.MATCH_PARENT;
+        year.leftMargin=50;
+        table.setLayoutParams(year);
     }
     public void loadData(){
 
@@ -74,44 +134,7 @@ public class ListStudentsByCourse extends AppCompatActivity {
             textView.setText("No data");
         }else{
 
-            TableRow tbrow0=new TableRow(this);
 
-            TextView tv0=new TextView(this);
-            tv0.setText("Sr No.");
-            tv0.setTextSize(20);
-            tv0.setGravity(Gravity.CENTER);
-            tv0.setTextColor(Color.WHITE);
-            tbrow0.addView(tv0);
-
-            TextView tv1=new TextView(this);
-            tv1.setText("Name");
-            tv1.setTextSize(20);
-            tv1.setGravity(Gravity.CENTER);
-            tv1.setTextColor(Color.WHITE);
-            tbrow0.addView(tv1);
-
-            TextView tv2=new TextView(this);
-            tv2.setText("Contact");
-            tv2.setTextSize(20);
-            tv2.setGravity(Gravity.CENTER);
-            tv2.setTextColor(Color.WHITE);
-            tbrow0.addView(tv2);
-
-            TextView tv3=new TextView(this);
-            tv3.setText("Course");
-            tv3.setTextSize(20);
-            tv3.setTextColor(Color.WHITE);
-            tv3.setGravity(Gravity.CENTER);
-            tbrow0.addView(tv3);
-
-            TextView tv4=new TextView(this);
-            tv4.setText("Year");
-            tv4.setTextSize(20);
-            tv4.setGravity(Gravity.CENTER);
-            tv4.setTextColor(Color.WHITE);
-            tbrow0.addView(tv4);
-
-            table.addView(tbrow0);
             int len=studentBeanList.size();
             int i=0;
             for(i=0;i<len;i++){
@@ -119,7 +142,7 @@ public class ListStudentsByCourse extends AppCompatActivity {
                 TableRow tbrow=new TableRow(this);
 
                 TextView tvData=new TextView(this);
-                tvData.setText(""+(i+1));
+                tvData.setText(""+(arr.getSid()));
                 tvData.setTextSize(20);
                 tvData.setTextColor(Color.WHITE);
                 tvData.setGravity(Gravity.CENTER);
@@ -182,28 +205,7 @@ public class ListStudentsByCourse extends AppCompatActivity {
 
             }
 
-            TableRow.LayoutParams id= (TableRow.LayoutParams) tv0.getLayoutParams();
-            id.width=ActionBar.LayoutParams.MATCH_PARENT;
-            table.setLayoutParams(id);
 
-            TableRow.LayoutParams name= (TableRow.LayoutParams) tv1.getLayoutParams();
-            name.width=ActionBar.LayoutParams.MATCH_PARENT;
-            name.leftMargin=10;
-            table.setLayoutParams(name);
-
-            TableRow.LayoutParams contact= (TableRow.LayoutParams) tv2.getLayoutParams();
-            contact.width=ActionBar.LayoutParams.MATCH_PARENT;
-            contact.leftMargin=50;
-            table.setLayoutParams(contact);
-
-            TableRow.LayoutParams course= (TableRow.LayoutParams) tv3.getLayoutParams();
-            course.width=ActionBar.LayoutParams.MATCH_PARENT;
-            course.leftMargin=50;
-            table.setLayoutParams(course);
-            TableRow.LayoutParams year= (TableRow.LayoutParams) tv4.getLayoutParams();
-            year.width=ActionBar.LayoutParams.MATCH_PARENT;
-            year.leftMargin=50;
-            table.setLayoutParams(year);
         }
     }
 }

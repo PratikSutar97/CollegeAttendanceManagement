@@ -1,70 +1,51 @@
 package com.example.attendancemanagementsystem.Attendance;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.attendancemanagementsystem.DBAdapter;
 import com.example.attendancemanagementsystem.R;
 import com.example.attendancemanagementsystem.SaveSharedPreference;
-import com.example.attendancemanagementsystem.StudentData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MarkAttendance extends AppCompatActivity {
 
     Button cancel;
     ArrayList<String> list = new ArrayList<String>();
-    ListView listView;
     String[] listt;
-    boolean doubleBackToExitPressedOnce = false;
+    TextView dateView;
+    String subStr;
+    TableLayout table;
+    DBAdapter db=new DBAdapter(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_attendance);
 
-
         cancel=findViewById(R.id.buttonCancel);
-        DBAdapter db=new DBAdapter(this);
-        String subStr=SaveSharedPreference.getPrefSubject(this);
+        table=findViewById(R.id.table);
+        dateView=findViewById(R.id.dateView);
+        dateView.setText(db.getDateTime());
+        subStr=SaveSharedPreference.getPrefSubject(this);
 
         list=db.getStudentBySubject(subStr);
-        listView=findViewById(R.id.listview);
         listt=new String[list.size()];
-        for(int i=0;i<list.size();i++){
-            listt[i]=list.get(i);
+        for(int i=0;i<list.size();i++) {
+            listt[i] = list.get(i);
         }
-        final TextView textView = (TextView) findViewById(R.id.textview);
-        final List<String> Players_list = new ArrayList<String>(Arrays.asList(listt));
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Players_list);
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (doubleBackToExitPressedOnce) {
-                    //To Close Entire Application
-                    view.setBackgroundColor(Color.RED);
-                    doubleBackToExitPressedOnce = false;
-                    return;
-                }
-                doubleBackToExitPressedOnce = true;
-                String selectedItem = (String) parent.getItemAtPosition(position);
-                textView.setText("The best football player is : " + selectedItem);
-                view.setBackgroundColor(Color.GREEN);
-
-            }
-        });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,5 +53,63 @@ public class MarkAttendance extends AppCompatActivity {
                 finish();
             }
         });
+        loadData();
+
     }
+
+    public void loadData(){
+
+        int i=0;
+        LinearLayout constraintLayout=findViewById(R.id.scrollLinear);
+        for(i=0;i<listt.length;i++){
+
+            final Button btn=new Button(this);
+            btn.setText(listt[i]);
+            btn.setTextSize(20);
+            btn.setTextColor(Color.parseColor("#D8D8D8"));
+            btn.setBackgroundResource( R.drawable.bt_style);
+            constraintLayout.addView(btn);
+
+            final int j=i;
+            //final DBAdapter db=new DBAdapter(MarkAttendance.this);
+            final AttendanceData attendanceData=new AttendanceData();
+            attendanceData.setSfname(listt[i]);
+            final int finalI = i;
+            btn.setOnTouchListener(new OnSwipeTouchListener(MarkAttendance.this){
+                public void onSwipeTop() {
+                    Toast.makeText(MarkAttendance.this, "top--", Toast.LENGTH_SHORT).show();
+                }
+                public void onSwipeRight() {
+                    attendanceData.setStatus("Present");
+                    btn.setTextColor(Color.WHITE);
+                    btn.setText(listt[finalI]+"     ---------> Marked Present");
+                    btn.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                    btn.setBackgroundColor(Color.parseColor("#6825F48A"));
+                    int flag=db.MscCaAttendance(attendanceData,subStr);
+                    if(flag==1){
+                        Toast.makeText(getApplicationContext(),"Attendance Marked",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Error Marking Attendance",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                public void onSwipeLeft() {
+                    btn.setBackgroundColor(Color.parseColor("#5BF44336"));
+                    attendanceData.setStatus("Absent");
+                    btn.setTextColor(Color.WHITE);
+                    btn.setText("Marked Absent <---------     "+listt[finalI]);
+                    btn.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+                    int flag=db.MscCaAttendance(attendanceData,subStr)  ;
+                    if(flag==1){
+                        Toast.makeText(getApplicationContext(),"Attendance Marked",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Error Marking Attendance",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                public void onSwipeBottom() {
+                    Toast.makeText(MarkAttendance.this, "bottom", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
 }

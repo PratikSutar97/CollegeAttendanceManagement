@@ -6,23 +6,27 @@ import androidx.preference.PreferenceManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.attendancemanagementsystem.Attendance.SelectCourse;
+import com.example.attendancemanagementsystem.Attendance.ViewAttendance;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FacultyHome extends AppCompatActivity {
 
     FloatingActionButton fab;
-    Button logoutbutton, changePassbutton,buttongetStudentDetail,buttonTakeAttendance;
+    Button logoutbutton, changePassbutton,buttongetStudentDetail,buttonTakeAttendance,btnViewAttendance;
     String username,isLoggedIn;
     TextView t;
-    //SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
     SharedPreferences sharedpreferences;
     Boolean isAllFabsVisible;
     boolean doubleBackToExitPressedOnce = false;
@@ -38,7 +42,7 @@ public class FacultyHome extends AppCompatActivity {
         changePassbutton.setVisibility(View.GONE);
         buttongetStudentDetail=findViewById(R.id.buttongetstudent);
         buttonTakeAttendance=findViewById(R.id.buttonTakeAttendance);
-
+        btnViewAttendance=findViewById(R.id.viewAttendance);
         isAllFabsVisible = false;
 
         sharedpreferences=PreferenceManager.getDefaultSharedPreferences(this);
@@ -62,12 +66,21 @@ public class FacultyHome extends AppCompatActivity {
                 }
             }
         });
+        btnViewAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(FacultyHome.this, SelectCourse.class);
+                startActivity(intent);
+                SaveSharedPreference.setPREF_view_take_attendance(FacultyHome.this,"View Attendance");
+            }
+        });
 
         buttonTakeAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(FacultyHome.this, SelectCourse.class);
                 startActivity(i);
+                SaveSharedPreference.setPREF_view_take_attendance(FacultyHome.this,"Take Attendance");
             }
         });
 

@@ -38,9 +38,7 @@ public class Menu extends AppCompatActivity {
         deleteStudent=findViewById(R.id.buttonClearStudent);
         deleteFaculty=findViewById(R.id.buttonClearStudent2);
 
-
         isAllFabsVisible = false;
-
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

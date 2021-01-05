@@ -27,9 +27,10 @@ import java.util.ArrayList;
 public class ViewStudent extends AppCompatActivity {
 
     ArrayList<StudentData> studentBeanList;
-    TextView id,name,contact,course,year;
     TableLayout table;
     ImageView logo;
+
+
     HorizontalScrollView scrollView;
     private ArrayAdapter<String> listAdapter;
     DBAdapter db=new DBAdapter(this);
@@ -56,12 +57,7 @@ public class ViewStudent extends AppCompatActivity {
 
             }
         },2000);
-
-    }
-
-    public void loadData(){
         TableRow tbrow0=new TableRow(this);
-
         TextView tv0=new TextView(this);
         tv0.setText("Sr No.");
         tv0.setTextSize(20);
@@ -126,6 +122,58 @@ public class ViewStudent extends AppCompatActivity {
         tbrow0.addView(tv8);
 
         table.addView(tbrow0);
+
+        ////
+
+
+        TableRow.LayoutParams id= (TableRow.LayoutParams) tv0.getLayoutParams();
+        id.width=ActionBar.LayoutParams.MATCH_PARENT;
+        table.setLayoutParams(id);
+
+        TableRow.LayoutParams name= (TableRow.LayoutParams) tv1.getLayoutParams();
+        name.width=ActionBar.LayoutParams.MATCH_PARENT;
+        name.leftMargin=10;
+        table.setLayoutParams(name);
+
+        TableRow.LayoutParams contact= (TableRow.LayoutParams) tv2.getLayoutParams();
+        contact.width=ActionBar.LayoutParams.MATCH_PARENT;
+        contact.leftMargin=50;
+        table.setLayoutParams(contact);
+
+        TableRow.LayoutParams course= (TableRow.LayoutParams) tv3.getLayoutParams();
+        course.width=ActionBar.LayoutParams.MATCH_PARENT;
+        course.leftMargin=50;
+        table.setLayoutParams(course);
+
+        TableRow.LayoutParams year= (TableRow.LayoutParams) tv4.getLayoutParams();
+        year.width=ActionBar.LayoutParams.MATCH_PARENT;
+        year.leftMargin=50;
+        table.setLayoutParams(year);
+
+        TableRow.LayoutParams sub1= (TableRow.LayoutParams) tv5.getLayoutParams();
+        sub1.width=ActionBar.LayoutParams.MATCH_PARENT;
+        sub1.leftMargin=50;
+        table.setLayoutParams(sub1);
+
+        TableRow.LayoutParams sub2= (TableRow.LayoutParams) tv6.getLayoutParams();
+        sub2.width=ActionBar.LayoutParams.MATCH_PARENT;
+        sub2.leftMargin=50;
+        table.setLayoutParams(sub2);
+
+        TableRow.LayoutParams sub3= (TableRow.LayoutParams) tv7.getLayoutParams();
+        sub3.width=ActionBar.LayoutParams.MATCH_PARENT;
+        sub3.leftMargin=50;
+        table.setLayoutParams(sub3);
+
+        TableRow.LayoutParams sub4= (TableRow.LayoutParams) tv8.getLayoutParams();
+        sub4.width=ActionBar.LayoutParams.MATCH_PARENT;
+        sub4.leftMargin=50;
+        table.setLayoutParams(sub4);
+    }
+
+    public void loadData(){
+
+
         studentBeanList=db.getAllStudents();
         int len=studentBeanList.size();
         int i=0;
@@ -245,50 +293,6 @@ public class ViewStudent extends AppCompatActivity {
             table.setLayoutParams(sub4);
 
         }
-
-        TableRow.LayoutParams id= (TableRow.LayoutParams) tv0.getLayoutParams();
-        id.width=ActionBar.LayoutParams.MATCH_PARENT;
-        table.setLayoutParams(id);
-
-        TableRow.LayoutParams name= (TableRow.LayoutParams) tv1.getLayoutParams();
-        name.width=ActionBar.LayoutParams.MATCH_PARENT;
-        name.leftMargin=10;
-        table.setLayoutParams(name);
-
-        TableRow.LayoutParams contact= (TableRow.LayoutParams) tv2.getLayoutParams();
-        contact.width=ActionBar.LayoutParams.MATCH_PARENT;
-        contact.leftMargin=50;
-        table.setLayoutParams(contact);
-
-        TableRow.LayoutParams course= (TableRow.LayoutParams) tv3.getLayoutParams();
-        course.width=ActionBar.LayoutParams.MATCH_PARENT;
-        course.leftMargin=50;
-        table.setLayoutParams(course);
-
-        TableRow.LayoutParams year= (TableRow.LayoutParams) tv4.getLayoutParams();
-        year.width=ActionBar.LayoutParams.MATCH_PARENT;
-        year.leftMargin=50;
-        table.setLayoutParams(year);
-
-        TableRow.LayoutParams sub1= (TableRow.LayoutParams) tv5.getLayoutParams();
-        sub1.width=ActionBar.LayoutParams.MATCH_PARENT;
-        sub1.leftMargin=50;
-        table.setLayoutParams(sub1);
-
-        TableRow.LayoutParams sub2= (TableRow.LayoutParams) tv6.getLayoutParams();
-        sub2.width=ActionBar.LayoutParams.MATCH_PARENT;
-        sub2.leftMargin=50;
-        table.setLayoutParams(sub2);
-
-        TableRow.LayoutParams sub3= (TableRow.LayoutParams) tv7.getLayoutParams();
-        sub3.width=ActionBar.LayoutParams.MATCH_PARENT;
-        sub3.leftMargin=50;
-        table.setLayoutParams(sub3);
-
-        TableRow.LayoutParams sub4= (TableRow.LayoutParams) tv8.getLayoutParams();
-        sub4.width=ActionBar.LayoutParams.MATCH_PARENT;
-        sub4.leftMargin=50;
-        table.setLayoutParams(sub4);
 
     }
 }

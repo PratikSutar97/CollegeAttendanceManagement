@@ -27,9 +27,11 @@
         android:layout_width="318dp"
         android:layout_height="54dp"
 
+        android:layout_below="@+id/buttongetstudent"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="57dp"
         android:layout_marginRight="57dp"
         android:background="@drawable/roundedbutton"
@@ -68,22 +70,56 @@
         android:text="Get Students By Course Name" />
 
     <Button
-        android:id="@+id/attendancePerStudentButton"
+        android:id="@+id/buttongetstudent2"
         android:layout_width="318dp"
         android:layout_height="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="57dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Get Students By Course Name" />
+
+    <Button
+        android:id="@+id/viewAttendance"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/buttonTakeAttendance"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="57dp"
         android:background="@drawable/roundedbutton"
         android:text="View Attendance" />
+
+    Spinner
+        android:id="@+id/spinnerCourse"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginLeft="00dp"
+        android:layout_marginTop="181dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginBottom="510dp"
+        android:background="#938787" />
 
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginLeft="20dp"
-        android:textSize="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="275dp"
+        android:text="Welcome, Faculty"
         android:textColor="#ffffff"
-        android:text="Welcome, Faculty" />
+        android:textSize="15dp" />
+
 
 </RelativeLayout>

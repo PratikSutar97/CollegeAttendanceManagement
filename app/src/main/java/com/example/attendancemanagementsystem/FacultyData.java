@@ -2,7 +2,7 @@ package com.example.attendancemanagementsystem;
 
 public class FacultyData {
     public int fid;
-    public String ffname,flname,fcontact,faddress,username,password,subject1,subject2;
+    public String ffname,fcontact,faddress,username,password,subject1,subject2;
 
     public int getfid(){
         return fid;
@@ -16,13 +16,6 @@ public class FacultyData {
     }
     public void setffname(String fname){
         this.ffname=fname;
-    }
-
-    public String getflname(){
-        return flname;
-    }
-    public void setflname(String lname){
-        this.flname=lname;
     }
 
     public String getfcontact(){

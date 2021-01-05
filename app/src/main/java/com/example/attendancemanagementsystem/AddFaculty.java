@@ -22,10 +22,20 @@ public class AddFaculty extends AppCompatActivity {
 
     Button addFaculty,cancel;
     Spinner spinnersub1,spinnersub2;
-    EditText fn,ln,contact,address,username,password;
-    TextView tv;
-    String sub1Str,sub2Str;
-    private ArrayList<String> subjectList=new ArrayList<String>();
+    Spinner courseSpinner,yearSpinner;
+    EditText fn,contact,address,username,password;
+    TextView tv,txvsub11,txvsub22;
+    String courseStr,yearStr,sub1Str,sub2Str;
+
+    private String[] courseArr=new String[]{"Bsc CS","Msc CA"};
+    private String[] yearArr=new String[]{"FY","SY","TY"};
+    private String[] yearArr1=new String[]{"FY","SY"};
+    private String[] BcsfySubs=new String[]{"C_Programming","Statistics","Discrete_Mathematics","Algebra_and_Calculus"};
+    private String[] BcssySubs=new String[]{"Data_structures", "RDBMS","Applied_Algebra", "Analog_systems"};
+    private String[] BcstySubs=new String[]{"Systems_Programming","Computer_Networking","Internet_programming","Java_programming"};
+    private String[] MscfySubs=new String[]{"DOT_NET","DAA","Web_Programming","PHP"};
+    private String[] MscsySubs=new String[]{"Android","PYthon","UI_UX","Cyber_Security"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,33 +43,25 @@ public class AddFaculty extends AppCompatActivity {
 
         spinnersub1=findViewById(R.id.spinnerSub1);
         spinnersub2=findViewById(R.id.spinnerSub2);
+        courseSpinner=findViewById(R.id.spinnerCourse);
+        yearSpinner=findViewById(R.id.spinnerYear);
         addFaculty=findViewById(R.id.buttonaddfaculty);
         fn=findViewById(R.id.editTextfirstname);
-        ln=findViewById(R.id.editTextlastname);
         contact=findViewById(R.id.editTextcontact);
         address=findViewById(R.id.editTextaddress);
         cancel=findViewById(R.id.buttonCancel);
         username=findViewById(R.id.editTextusername);
         password=findViewById(R.id.editTextpassword);
         tv=findViewById(R.id.textView);
+        txvsub11=findViewById(R.id.textSub11);
+        txvsub22=findViewById(R.id.textSub22);
 
-        subjectList.add("Android");
-        subjectList.add("Java");
-        subjectList.add("Cloud");
-        subjectList.add("Python");
-        subjectList.add("UX/UI");
-        subjectList.add("Testing");
-        subjectList.add("HTML");
-        subjectList.add("C#");
-        subjectList.add("C");
-        subjectList.add("PHP");
         ////// SPINNER
         spinnersub1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 ((TextView)adapterView.getChildAt(0)).setTextColor(Color.WHITE);
                 sub1Str=(String)spinnersub1.getSelectedItem();
-
             }
 
             @Override
@@ -67,19 +69,12 @@ public class AddFaculty extends AppCompatActivity {
 
             }
         });
-
-
-        ArrayAdapter<String> adapter_subject1=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,subjectList);
-        adapter_subject1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnersub1.setAdapter(adapter_subject1);
 
         spinnersub2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 ((TextView)adapterView.getChildAt(0)).setTextColor(Color.WHITE);
                 sub2Str=(String)spinnersub2.getSelectedItem();
-                subjectList.remove(sub1Str);
-
             }
 
             @Override
@@ -88,35 +83,115 @@ public class AddFaculty extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<String> adapter_subject2=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,subjectList);
-        adapter_subject2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnersub2.setAdapter(adapter_subject2);
+
+        courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ((TextView)adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                courseStr=(String)courseSpinner.getSelectedItem();
+
+                if(courseStr.equals(courseArr[1])){
+                    ArrayAdapter<String> adapter_year=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,yearArr1);
+                    adapter_year.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    yearSpinner.setAdapter(adapter_year);
+                }else{
+                    ArrayAdapter<String> adapter_year=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,yearArr);
+                    adapter_year.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    yearSpinner.setAdapter(adapter_year);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ArrayAdapter<String> adapter_course=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,courseArr);
+        adapter_course.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        courseSpinner.setAdapter(adapter_course);
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ((TextView)adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                yearStr=(String)yearSpinner.getSelectedItem();
+
+                if(courseStr.equals(courseArr[0]) && yearStr.equals(yearArr[0])){
+                    ArrayAdapter<String> adapter_subject2=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,BcsfySubs);
+                    adapter_subject2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub2.setAdapter(adapter_subject2);
+
+                    final ArrayAdapter<String> adapter_subject1=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,BcsfySubs);
+                    adapter_subject1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub1.setAdapter(adapter_subject1);
+
+                }else
+                if(courseStr.equals(courseArr[0]) && yearStr.equals(yearArr[1])){
+                    ArrayAdapter<String> adapter_subject2=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,BcssySubs);
+                    adapter_subject2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub2.setAdapter(adapter_subject2);
+
+                    final ArrayAdapter<String> adapter_subject1=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,BcssySubs);
+                    adapter_subject1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub1.setAdapter(adapter_subject1);
+                }else
+                if(courseStr.equals(courseArr[0]) && yearStr.equals(yearArr[2])){
+                    ArrayAdapter<String> adapter_subject2=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,BcstySubs);
+                    adapter_subject2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub2.setAdapter(adapter_subject2);
+
+                    final ArrayAdapter<String> adapter_subject1=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,BcstySubs);
+                    adapter_subject1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub1.setAdapter(adapter_subject1);
+                }else
+                if(courseStr.equals(courseArr[1]) && yearStr.equals(yearArr[0])){
+                    ArrayAdapter<String> adapter_subject2=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,MscfySubs);
+                    adapter_subject2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub2.setAdapter(adapter_subject2);
 
 
-        ////
+                    final ArrayAdapter<String> adapter_subject1=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,MscfySubs);
+                    adapter_subject1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub1.setAdapter(adapter_subject1);
+                }else
+                if(courseStr.equals(courseArr[1]) && yearStr.equals(yearArr[1])){
+                    ArrayAdapter<String> adapter_subject2=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,MscsySubs);
+                    adapter_subject2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub2.setAdapter(adapter_subject2);
+
+                    final ArrayAdapter<String> adapter_subject1=new ArrayAdapter<String>(AddFaculty.this,android.R.layout.simple_spinner_item,MscsySubs);
+                    adapter_subject1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnersub1.setAdapter(adapter_subject1);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         addFaculty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 DBAdapter dbAdapter=new DBAdapter(AddFaculty.this);
 
                 String fname=fn.getText().toString();
-                String lname=ln.getText().toString();
                 String ct=contact.getText().toString();
                 String addr=address.getText().toString();
                 String user=username.getText().toString();
                 String pass=password.getText().toString();
 
-                ArrayList<FacultyData> f= dbAdapter.getFacultyByUsername(user);
-
-                if(f.size()>0){
-                    username.setError("Username Already Exists");
-                }else
+//                ArrayList<FacultyData> f= dbAdapter.getFacultyByUsername(user);
+//
+//                if(f.size()>0){
+//                    username.setError("Username Already Exists");
+//                }else
                 if(TextUtils.isEmpty(fname)){
                     fn.setError("Please Enter first name");
-                }
-                else if(TextUtils.isEmpty(lname)){
-                    ln.setError("Please Enter last name");
                 }
                 else if(TextUtils.isEmpty(ct)){
                     contact.setError("Please Enter contact number");
@@ -126,7 +201,6 @@ public class AddFaculty extends AppCompatActivity {
                 }else {
                     FacultyData facultyData=new FacultyData();
                     facultyData.setffname(fname);
-                    facultyData.setflname(lname);
                     facultyData.setfcontact(ct);
                     facultyData.setfaddress(addr);
                     facultyData.setusername(user);

@@ -9,7 +9,12 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.attendancemanagementsystem.Attendance.AttendanceData;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class DBAdapter extends SQLiteOpenHelper {
 
@@ -20,7 +25,7 @@ public class DBAdapter extends SQLiteOpenHelper {
 
     private static final String FACULTY_ID = "faculty_id";
     private static final String FACULTY_FIRSTNAME = "faculty_firstname";
-    private static final String FACULTY_LASTNAME = "faculty_Lastname";
+
     private static final String FACULTY_MO_NO = "faculty_mobilenumber";
     private static final String FACULTY_ADDRESS = "faculty_address";
     private static final String FACULTY_USERNAME = "faculty_username";
@@ -196,6 +201,15 @@ public class DBAdapter extends SQLiteOpenHelper {
     public int addStudent(StudentData studentData){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
 
+        String att1="insert into '"+studentData.getSub1()+"' (student_firstname) values ('"+studentData.getSfname()+"')";
+        sqLiteDatabase.execSQL(att1);
+        String att2="insert into '"+studentData.getSub2()+"' (student_firstname) values ('"+studentData.getSfname()+"')";
+        sqLiteDatabase.execSQL(att2);
+        String att3="insert into '"+studentData.getSub3()+"' (student_firstname) values ('"+studentData.getSfname()+"')";
+        sqLiteDatabase.execSQL(att3);
+        String att4="insert into '"+studentData.getSub4()+"' (student_firstname) values ('"+studentData.getSfname()+"')";
+        sqLiteDatabase.execSQL(att4);
+
         String queryStudent = "CREATE TABLE IF NOT EXISTS " + STUDENT + " (" +
                 STUDENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT DEfault 0, " +
                 STUDENT_FIRSTNAME + " TEXT, " +
@@ -231,6 +245,78 @@ public class DBAdapter extends SQLiteOpenHelper {
         }
 
     }
+    //////////////////////////////////// ATTENDANCE //////////////////////////////////////////////////////
+
+    public int createAttendanceSheets(String subject){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="delete from faculty";
+        db.execSQL(query);
+        return 0;
+    }
+
+    public int deletestudentbycourseyear(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="delete from PYthon ";
+        db.execSQL(query);
+        return 0;
+    }
+    public int MscCaAttendance(AttendanceData attendanceData,String sub){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        String createQuery="Create table if not exists "+sub+"(student_firstname text,lec_date DATE,status text)";
+        String updateQuery="update '"+sub+"' set lec_date='"+getDateTime()+"' , status='"+attendanceData.getStatus()+"' where student_firstname='"+attendanceData.getSfname()+"'";
+
+        //String query="insert into "+sub+"("+STUDENT_FIRSTNAME+",lec_date,status)"+"values('"+attendanceData.getSfname()+"'," +
+          //      "'"+getDateTime()+"','"+attendanceData.getStatus()+"')";
+        try{
+            db.execSQL(updateQuery);
+            return 1;
+        }catch (Exception e){
+            Log.e("Attendacne Error","Attendance Error ---"+e);
+            return 0;
+        }
+    }
+
+    public ArrayList<AttendanceData> getAllAttendance(String course){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        ArrayList<AttendanceData> arr=new ArrayList<>();
+        String query="select * from '"+course+"'";
+        Cursor cursor;
+        try {
+             cursor = db.rawQuery(query, null);
+        }catch (Exception e){
+            Log.e("---error",""+e);
+
+            return null;
+        }
+
+        if(cursor.moveToNext()){
+            do{
+                AttendanceData attendanceData=new AttendanceData();
+                attendanceData.setSfname(cursor.getString(0));
+                attendanceData.setStatus(cursor.getString(2));
+                attendanceData.setDate(cursor.getString(1));
+                arr.add(attendanceData);
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        if(cursor==null)
+            return null;
+        else
+            return arr;
+    }
+    public String getDateTime() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+
+                "dd-MM-yyyy ", Locale.getDefault());
+
+        Date date = new Date();
+
+        return dateFormat.format(date);
+    }
     /////////////////////////////////// FACULTY QUERIES //////////////////////////////////////
     public int deleteAllFaculty(){
         SQLiteDatabase db=this.getWritableDatabase();
@@ -256,13 +342,12 @@ public class DBAdapter extends SQLiteOpenHelper {
             FacultyData facultyData = new FacultyData();
             facultyData.setfid(Integer.parseInt(cursor.getString(0)));
             facultyData.setffname(cursor.getString(1));
-            facultyData.setflname(cursor.getString(2));
-            facultyData.setfcontact(cursor.getString(3));
-            facultyData.setfaddress(cursor.getString(4));
-            facultyData.setusername(cursor.getString(5));
-            facultyData.setpassword(cursor.getString(6));
-            facultyData.setSubject1(cursor.getString(7));
-            facultyData.setSubject2(cursor.getString(8));
+            facultyData.setfcontact(cursor.getString(2));
+            facultyData.setfaddress(cursor.getString(3));
+            facultyData.setusername(cursor.getString(4));
+            facultyData.setpassword(cursor.getString(5));
+            facultyData.setSubject1(cursor.getString(6));
+          facultyData.setSubject2(cursor.getString(7));
             cursor.close();
             return facultyData;
         }
@@ -302,14 +387,15 @@ public class DBAdapter extends SQLiteOpenHelper {
 
         if(cursor.moveToNext()){
             do{
+                cursor.getColumnCount();
                 FacultyData facultyData=new FacultyData();
                 facultyData.setfid(Integer.parseInt(cursor.getString(0)));
                 facultyData.setffname(cursor.getString(1));
-                facultyData.setfcontact(cursor.getString(3));
-                facultyData.setusername(cursor.getString(5));
-                facultyData.setpassword(cursor.getString(6));
-                facultyData.setSubject1(cursor.getString(7));
-                facultyData.setSubject2(cursor.getString(8));
+                facultyData.setfcontact(cursor.getString(2));
+                facultyData.setusername(cursor.getString(4));
+                facultyData.setpassword(cursor.getString(5));
+                facultyData.setSubject1(cursor.getString(6));
+                facultyData.setSubject2(cursor.getString(7));
                 arr.add(facultyData);
             }while (cursor.moveToNext());
         }
@@ -330,26 +416,23 @@ public class DBAdapter extends SQLiteOpenHelper {
                 FacultyData facultyData=new FacultyData();
                 facultyData.setfid(Integer.parseInt(cursor.getString(0)));
                 facultyData.setffname(cursor.getString(1));
-                facultyData.setfcontact(cursor.getString(3));
-                facultyData.setusername(cursor.getString(5));
-                facultyData.setpassword(cursor.getString(6));
-                facultyData.setSubject1(cursor.getString(7));
-                facultyData.setSubject2(cursor.getString(8));
+                facultyData.setfcontact(cursor.getString(2));
+                facultyData.setfaddress(cursor.getString(3));
+                facultyData.setusername(cursor.getString(4));
+                facultyData.setpassword(cursor.getString(5));
+                facultyData.setSubject1(cursor.getString(6));
+                facultyData.setSubject2(cursor.getString(7));
                 arr.add(facultyData);
             }while (cursor.moveToNext());
         }
         cursor.close();
         return arr;
     }
-
     public int addFaculty(FacultyData facultyData){
-
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
-
         String queryFaculty = "CREATE TABLE IF NOT EXISTS " + FACULTY + " (" +
                 FACULTY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT DEfault 0, " +
                 FACULTY_FIRSTNAME + " TEXT, " +
-                FACULTY_LASTNAME + " TEXT, " +
                 FACULTY_MO_NO + " TEXT, " +
                 FACULTY_ADDRESS + " TEXT," +
                 FACULTY_USERNAME + " TEXT," +
@@ -357,9 +440,8 @@ public class DBAdapter extends SQLiteOpenHelper {
                 FACULTY_SUBJECT1 + " TEXT, " +
                 FACULTY_SUBJECT2 + " TEXT " + ")";
 
-        String query="insert into "+FACULTY+"("+FACULTY_FIRSTNAME+","+FACULTY_LASTNAME+","+FACULTY_MO_NO+","+FACULTY_ADDRESS+","+FACULTY_USERNAME+","+FACULTY_PASSWORD+","+FACULTY_SUBJECT1+","+FACULTY_SUBJECT2+")" +
+        String query="insert into "+FACULTY+"("+FACULTY_FIRSTNAME+","+FACULTY_MO_NO+","+FACULTY_ADDRESS+","+FACULTY_USERNAME+","+FACULTY_PASSWORD+","+FACULTY_SUBJECT1+","+FACULTY_SUBJECT2+")" +
                 " values('"+facultyData.getffname()+"'," +
-                "'"+facultyData.getflname()+"'," +
                 "'"+facultyData.getfcontact()+"'," +
                 "'"+facultyData.getfaddress()+"'," +
                 "'"+facultyData.getusername()+"'," +

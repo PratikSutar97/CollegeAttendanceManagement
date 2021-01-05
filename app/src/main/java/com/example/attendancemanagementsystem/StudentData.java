@@ -15,14 +15,6 @@ public class StudentData {
     public void setSfname(String fname){
         this.sfname=fname;
     }
-
-    public String getSlname(){
-        return slname;
-    }
-    public void setSlname(String lname){
-        this.slname=lname;
-    }
-
     public String getScontact(){return scontact;}
     public void setScontact(String scontact){
         this.scontact=scontact;

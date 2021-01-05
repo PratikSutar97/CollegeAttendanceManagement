@@ -5,19 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.attendancemanagementsystem.DBAdapter;
 import com.example.attendancemanagementsystem.FacultyData;
 import com.example.attendancemanagementsystem.R;
 import com.example.attendancemanagementsystem.SaveSharedPreference;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class SelectCourse extends AppCompatActivity {
 
@@ -25,6 +30,7 @@ public class SelectCourse extends AppCompatActivity {
     ArrayList<FacultyData> facultyBeanList;
     String courseStr,subjectStr;
     Button btnaddStudent,btnCancel;
+    TextView t3;
     //private String[] courseArr=new String[]{"Bsc CS","Msc CS","Bsc CA","Msc CA"};
     private ArrayList<String> courseArrr=new ArrayList<String>();
     private ArrayList<String> subjectArrr=new ArrayList<String>();
@@ -34,6 +40,8 @@ public class SelectCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_course);
 
+        t3=findViewById(R.id.t3);
+        t3.setVisibility(View.INVISIBLE);
         btnaddStudent=findViewById(R.id.buttonaddstudent);
         btnCancel=findViewById(R.id.buttonCancel);
         subjectSpinner=findViewById(R.id.spinnerSubject);
@@ -70,9 +78,36 @@ public class SelectCourse extends AppCompatActivity {
         btnaddStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SaveSharedPreference.setSubject(SelectCourse.this,subjectStr);
-                Intent i=new Intent(SelectCourse.this,MarkAttendance.class);
-                startActivity(i);
+            DBAdapter db=new DBAdapter(SelectCourse.this);
+
+                ArrayList<AttendanceData> attendanceData=db.getAllAttendance(subjectStr);
+
+                    SaveSharedPreference.setSubject(SelectCourse.this,subjectStr);
+
+                    if(SaveSharedPreference.getPREF_view_take_attendance(SelectCourse.this).equals("Take Attendance")){
+                        //int i=attendanceData.size()-1;
+                        //SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy ", Locale.getDefault());
+                        //Date date = new Date();
+                        //String datee=dateFormat.format(date);
+//                        if(attendanceData.get(i).getDate().equals(datee)){
+//                            t3.setVisibility(View.VISIBLE);
+//                            new Handler().postDelayed(new Runnable() {
+//
+//                                @Override
+//                                public void run() {
+//                                    t3.setVisibility(View.INVISIBLE);
+//                                }
+//                            }, 2500);
+//                        }else{
+                            Intent ii=new Intent(SelectCourse.this,MarkAttendance.class);
+                            startActivity(ii);
+
+                    }else{
+                        Intent ii=new Intent(SelectCourse.this,ViewAttendance.class);
+                        startActivity(ii);
+                    }
+
+
             }
         });
 
