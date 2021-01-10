@@ -2,7 +2,7 @@ package com.example.attendancemanagementsystem.Attendance;
 
 public class AttendanceData {
     public String sfname,status;
-    public String date;
+    public String date,count;
 
     public void setDate(String date){
         this.date=date;
@@ -21,5 +21,11 @@ public class AttendanceData {
     }
     public String getSfname(){
         return this.sfname;
+    }
+    public void setcount(String cnt){
+        this.count=cnt;
+    }
+    public String getcount(){
+        return this.count;
     }
 }

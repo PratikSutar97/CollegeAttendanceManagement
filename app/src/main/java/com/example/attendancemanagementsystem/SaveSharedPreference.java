@@ -11,9 +11,30 @@ public class SaveSharedPreference {
     static final String PREF_USERROLE= "userrole";
     static final String PREF_SUBJECT= "subject";
     static final String PREF_view_take_attendance="view_or_take_attendance";
+    static final String PREF_one_more_lecture="take_ome_more_lecture";
+    static final String PREF_lec_count="lec_count";
 
     static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
+    }
+
+    public static void setPREF_lec_count(Context ctx,String value){
+        SharedPreferences.Editor editor=getSharedPreferences(ctx).edit();
+        editor.putString(PREF_lec_count,value);
+        editor.commit();
+    }
+    public static String getPREF_lec_count(Context ctx){
+        return getSharedPreferences(ctx).getString(PREF_lec_count,"");
+    }
+
+    public static void setPREF_one_more_lecture(Context ctx,String value){
+        SharedPreferences.Editor editor=getSharedPreferences(ctx).edit();
+        editor.putString(PREF_one_more_lecture,value);
+        editor.commit();
+    }
+
+    public static String getPREF_one_more_lecture(Context ctx){
+        return getSharedPreferences(ctx).getString(PREF_one_more_lecture,"");
     }
 
     public static void setPREF_view_take_attendance(Context ctx,String value){

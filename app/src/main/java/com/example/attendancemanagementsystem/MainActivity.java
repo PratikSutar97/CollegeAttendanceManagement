@@ -23,6 +23,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     String userrole;
     TextView warning;
     SharedPreferences sharedpreferences;
+
+    String dbname="attendanceSystem";
+
     private String[] userRoleString = new String[]{"ADMIN", "FACULTY"};
     public static final String MyPREFERENCES = "MyPrefs" ;
     @Override
@@ -43,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (NullPointerException e){}
         setContentView(R.layout.activity_main);
-
 
         login=findViewById(R.id.buttonlogin);
         username=findViewById(R.id.editTextusername);

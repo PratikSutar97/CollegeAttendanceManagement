@@ -59,6 +59,13 @@ public class ViewAttendance extends AppCompatActivity {
         tv3.setGravity(Gravity.CENTER);
         tbrow0.addView(tv3);
 
+        TextView tv4=new TextView(this);
+        tv4.setText("Lec Counts");
+        tv4.setTextSize(20);
+        tv4.setTextColor(Color.WHITE);
+        tv4.setGravity(Gravity.CENTER);
+        tbrow0.addView(tv4);
+
         table.addView(tbrow0);
 
         TableRow.LayoutParams id= (TableRow.LayoutParams) tv0.getLayoutParams();
@@ -80,6 +87,10 @@ public class ViewAttendance extends AppCompatActivity {
         course.leftMargin=50;
         table.setLayoutParams(course);
 
+        TableRow.LayoutParams count= (TableRow.LayoutParams) tv4.getLayoutParams();
+        count.width=ActionBar.LayoutParams.MATCH_PARENT;
+        count.leftMargin=30;
+        table.setLayoutParams(count);
         loadData();
     }
     public void loadData(){
@@ -119,6 +130,14 @@ public class ViewAttendance extends AppCompatActivity {
             tvData3.setGravity(Gravity.CENTER);
             tvData3.setTextColor(Color.WHITE);
             tbrow.addView(tvData3);
+
+            TextView tvData4=new TextView(this);
+            tvData4.setText(arr.getcount());
+            tvData4.setTextSize(20);
+            tvData4.setGravity(Gravity.CENTER);
+            tvData4.setTextColor(Color.WHITE);
+            tbrow.addView(tvData4);
+
 
             table.addView(tbrow);
 

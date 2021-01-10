@@ -1,15 +1,23 @@
 package com.example.attendancemanagementsystem.Attendance;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,11 +34,17 @@ import java.util.Locale;
 
 public class SelectCourse extends AppCompatActivity {
 
-    Spinner subjectSpinner, courseSpinner;
+    ImageButton arrow;
+    ConstraintLayout fixed_layout;
+    LinearLayout hiddenView;
+    EditText lec_count;
+
+    Spinner subjectSpinner;
     ArrayList<FacultyData> facultyBeanList;
     String courseStr,subjectStr;
-    Button btnaddStudent,btnCancel;
+    Button btnaddStudent,btnCancel,yes,no,go;
     TextView t3;
+    int yes_no_flag;
     //private String[] courseArr=new String[]{"Bsc CS","Msc CS","Bsc CA","Msc CA"};
     private ArrayList<String> courseArrr=new ArrayList<String>();
     private ArrayList<String> subjectArrr=new ArrayList<String>();
@@ -40,8 +54,58 @@ public class SelectCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_course);
 
+       // cardView = findViewById(R.id.base_cardview);
+        arrow = findViewById(R.id.arrow_button);
+        hiddenView = findViewById(R.id.hidden_view);
+        fixed_layout=findViewById(R.id.fixed_layout);
+        yes=findViewById(R.id.yes);
+        no=findViewById(R.id.no);
+
+
+        Button btnDelete=findViewById(R.id.buttondeleAttend);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBAdapter db=new DBAdapter(SelectCourse.this);
+                db.deleteAttend();
+            }
+        });
+
+
+        arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hiddenView.getVisibility() == View.VISIBLE ) {
+                    hiddenView.setVisibility(View.GONE);
+                    arrow.setImageResource(R.drawable.ic_launcher1_expand_arrow_foreground);
+                }
+                else {
+                    hiddenView.setVisibility(View.VISIBLE);
+                    arrow.setImageResource(R.drawable.ic_launcher1_expand_arrow_up_foreground);
+                }
+            }
+        });
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hiddenView.setVisibility(View.GONE);
+                Intent ii=new Intent(SelectCourse.this,MarkAttendance.class);
+                startActivity(ii);
+
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hiddenView.setVisibility(View.GONE);
+                arrow.setImageResource(R.drawable.ic_launcher1_expand_arrow_foreground);
+            }
+        });
+
         t3=findViewById(R.id.t3);
-        t3.setVisibility(View.INVISIBLE);
+        t3.setVisibility(View.GONE);
+        fixed_layout.setVisibility(View.INVISIBLE);
         btnaddStudent=findViewById(R.id.buttonaddstudent);
         btnCancel=findViewById(R.id.buttonCancel);
         subjectSpinner=findViewById(R.id.spinnerSubject);
@@ -51,7 +115,7 @@ public class SelectCourse extends AppCompatActivity {
         courseArrr.add("Bsc CA");
         courseArrr.add("Msc CA");
 
-        DBAdapter db=new DBAdapter(this);
+        final DBAdapter db=new DBAdapter(this);
         facultyBeanList=db.getFacultyByUsername(SaveSharedPreference.getUserName(this));
 
         subjectArrr.add(facultyBeanList.get(0).getSubject1());
@@ -78,39 +142,21 @@ public class SelectCourse extends AppCompatActivity {
         btnaddStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            DBAdapter db=new DBAdapter(SelectCourse.this);
-
-                ArrayList<AttendanceData> attendanceData=db.getAllAttendance(subjectStr);
-
                     SaveSharedPreference.setSubject(SelectCourse.this,subjectStr);
-
                     if(SaveSharedPreference.getPREF_view_take_attendance(SelectCourse.this).equals("Take Attendance")){
-                        //int i=attendanceData.size()-1;
-                        //SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy ", Locale.getDefault());
-                        //Date date = new Date();
-                        //String datee=dateFormat.format(date);
-//                        if(attendanceData.get(i).getDate().equals(datee)){
-//                            t3.setVisibility(View.VISIBLE);
-//                            new Handler().postDelayed(new Runnable() {
-//
-//                                @Override
-//                                public void run() {
-//                                    t3.setVisibility(View.INVISIBLE);
-//                                }
-//                            }, 2500);
-//                        }else{
+
+                        if(db.getcount(subjectStr)==0){
                             Intent ii=new Intent(SelectCourse.this,MarkAttendance.class);
                             startActivity(ii);
-
+                        }else{
+                            fixed_layout.setVisibility(View.VISIBLE);
+                        }
                     }else{
                         Intent ii=new Intent(SelectCourse.this,ViewAttendance.class);
                         startActivity(ii);
                     }
-
-
             }
         });
-
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

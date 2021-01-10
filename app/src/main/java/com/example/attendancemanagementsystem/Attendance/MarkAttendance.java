@@ -35,11 +35,16 @@ public class MarkAttendance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_attendance);
 
+
+
         cancel=findViewById(R.id.buttonCancel);
         table=findViewById(R.id.table);
         dateView=findViewById(R.id.dateView);
         dateView.setText(db.getDateTime());
+
         subStr=SaveSharedPreference.getPrefSubject(this);
+
+        db.markAttendOnStart(subStr);
 
         list=db.getStudentBySubject(subStr);
         listt=new String[list.size()];
@@ -58,11 +63,9 @@ public class MarkAttendance extends AppCompatActivity {
     }
 
     public void loadData(){
-
         int i=0;
         LinearLayout constraintLayout=findViewById(R.id.scrollLinear);
         for(i=0;i<listt.length;i++){
-
             final Button btn=new Button(this);
             btn.setText(listt[i]);
             btn.setTextSize(20);
@@ -82,9 +85,11 @@ public class MarkAttendance extends AppCompatActivity {
                 public void onSwipeRight() {
                     attendanceData.setStatus("Present");
                     btn.setTextColor(Color.WHITE);
+                    btn.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
                     btn.setText(listt[finalI]+"     ---------> Marked Present");
-                    btn.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+
                     btn.setBackgroundColor(Color.parseColor("#6825F48A"));
+                    Toast.makeText(MarkAttendance.this,"--"+subStr,Toast.LENGTH_SHORT).show();
                     int flag=db.MscCaAttendance(attendanceData,subStr);
                     if(flag==1){
                         Toast.makeText(getApplicationContext(),"Attendance Marked",Toast.LENGTH_SHORT).show();
@@ -95,9 +100,10 @@ public class MarkAttendance extends AppCompatActivity {
                 public void onSwipeLeft() {
                     btn.setBackgroundColor(Color.parseColor("#5BF44336"));
                     attendanceData.setStatus("Absent");
+                    btn.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
                     btn.setTextColor(Color.WHITE);
                     btn.setText("Marked Absent <---------     "+listt[finalI]);
-                    btn.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+
                     int flag=db.MscCaAttendance(attendanceData,subStr)  ;
                     if(flag==1){
                         Toast.makeText(getApplicationContext(),"Attendance Marked",Toast.LENGTH_SHORT).show();

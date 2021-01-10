@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.attendancemanagementsystem.Attendance.AttendanceData;
+import com.example.attendancemanagementsystem.Attendance.SelectCourse;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -247,27 +248,70 @@ public class DBAdapter extends SQLiteOpenHelper {
     }
     //////////////////////////////////// ATTENDANCE //////////////////////////////////////////////////////
 
-    public int createAttendanceSheets(String subject){
+    public int insertformorelectures(){
         SQLiteDatabase db=this.getWritableDatabase();
         String query="delete from faculty";
         db.execSQL(query);
         return 0;
     }
 
-    public int deletestudentbycourseyear(){
+    public int getcount(String sub){
+
         SQLiteDatabase db=this.getWritableDatabase();
-        String query="delete from PYthon ";
+        String query="select * from '"+sub+"' where lec_date='"+getDateTime()+"'";
+        Cursor c;
+        int lec_countt=0;
+        try {
+            c = db.rawQuery(query, null);
+            lec_countt=c.getCount();
+            return lec_countt;
+        }catch (Exception e){
+            Log.e("Count Error","Errorr-- "+e);
+        }
+//        }
+        return lec_countt;
+    }
+
+    public int deleteAttend(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="delete from PYthon where lec_date='"+getDateTime()+"'";
         db.execSQL(query);
         return 0;
     }
+    public int markAttendOnStart(String sub){
+        SQLiteDatabase db=this.getWritableDatabase();
+        int cnt=getcount(sub);
+        int ofset=0;
+        if(cnt>0){
+            ofset=cnt-1;
+            String getLecCount="select lec_count from '"+sub+"' where lec_date='"+getDateTime()+"' limit 1 offset '"+ofset+"' ";
+            try {
+                Cursor c1 = db.rawQuery(getLecCount, null);
+                c1.moveToNext();
+                cnt = Integer.parseInt(c1.getString(0));
+            }catch (Exception e){
+                Log.e("Errorr","Errorr-----"+cnt+"---"+e);
+            }
+            cnt++;
+        }else{
+            cnt++;
+        }
+
+        String getStudents="select student_firstname from student where student_subject1='"+sub+"' or student_subject2='"+sub+"' or student_subject3='"+sub+"' or student_subject4='"+sub+"' ";
+        Cursor cursor=db.rawQuery(getStudents,null);
+
+        if(cursor.moveToNext()){
+            do{
+                String q="insert into '"+sub+"' (student_firstname,lec_date,lec_count) values( '"+cursor.getString(0)+"','"+getDateTime()+"','"+cnt+"'  )";
+                db.execSQL(q);
+            }while (cursor.moveToNext());
+        }
+        return  0;
+    }
     public int MscCaAttendance(AttendanceData attendanceData,String sub){
         SQLiteDatabase db=this.getWritableDatabase();
+        String updateQuery="update '"+sub+"' set status='"+attendanceData.getStatus()+"' where student_firstname='"+attendanceData.getSfname()+"' and lec_date='"+getDateTime()+"' ";
 
-        String createQuery="Create table if not exists "+sub+"(student_firstname text,lec_date DATE,status text)";
-        String updateQuery="update '"+sub+"' set lec_date='"+getDateTime()+"' , status='"+attendanceData.getStatus()+"' where student_firstname='"+attendanceData.getSfname()+"'";
-
-        //String query="insert into "+sub+"("+STUDENT_FIRSTNAME+",lec_date,status)"+"values('"+attendanceData.getSfname()+"'," +
-          //      "'"+getDateTime()+"','"+attendanceData.getStatus()+"')";
         try{
             db.execSQL(updateQuery);
             return 1;
@@ -297,6 +341,7 @@ public class DBAdapter extends SQLiteOpenHelper {
                 attendanceData.setSfname(cursor.getString(0));
                 attendanceData.setStatus(cursor.getString(2));
                 attendanceData.setDate(cursor.getString(1));
+                attendanceData.setcount(cursor.getString(3));
                 arr.add(attendanceData);
             }while (cursor.moveToNext());
         }
