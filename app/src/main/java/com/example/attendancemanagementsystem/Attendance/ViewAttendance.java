@@ -6,6 +6,8 @@ import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,6 +24,7 @@ public class ViewAttendance extends AppCompatActivity {
     TextView viewSubject;
     ArrayList<AttendanceData> studentBeanList;
     TableLayout table;
+    Button done;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,14 @@ public class ViewAttendance extends AppCompatActivity {
         table=findViewById(R.id.table);
         viewSubject=findViewById(R.id.textViewSubject);
         viewSubject.setText("( "+SaveSharedPreference.getPrefSubject(ViewAttendance.this)+" )");
+        done=findViewById(R.id.buttondone);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        //// Table Headingssssssss ////////////////////////
         TableRow tbrow0=new TableRow(this);
         TextView tv0=new TextView(this);
         tv0.setText("Sr No.");
@@ -60,7 +71,7 @@ public class ViewAttendance extends AppCompatActivity {
         tbrow0.addView(tv3);
 
         TextView tv4=new TextView(this);
-        tv4.setText("Lec Counts");
+        tv4.setText("Lecture Counts");
         tv4.setTextSize(20);
         tv4.setTextColor(Color.WHITE);
         tv4.setGravity(Gravity.CENTER);
@@ -77,29 +88,39 @@ public class ViewAttendance extends AppCompatActivity {
         name.leftMargin=10;
         table.setLayoutParams(name);
 
-        TableRow.LayoutParams contact= (TableRow.LayoutParams) tv2.getLayoutParams();
-        contact.width=ActionBar.LayoutParams.MATCH_PARENT;
-        contact.leftMargin=50;
-        table.setLayoutParams(contact);
+        TableRow.LayoutParams contact1= (TableRow.LayoutParams) tv2.getLayoutParams();
+        contact1.width=ActionBar.LayoutParams.MATCH_PARENT;
+        contact1.leftMargin=50;
+        table.setLayoutParams(contact1);
 
-        TableRow.LayoutParams course= (TableRow.LayoutParams) tv3.getLayoutParams();
-        course.width=ActionBar.LayoutParams.MATCH_PARENT;
-        course.leftMargin=50;
-        table.setLayoutParams(course);
+        TableRow.LayoutParams course1= (TableRow.LayoutParams) tv3.getLayoutParams();
+        course1.width=ActionBar.LayoutParams.MATCH_PARENT;
+        course1.leftMargin=50;
+        table.setLayoutParams(course1);
 
         TableRow.LayoutParams count= (TableRow.LayoutParams) tv4.getLayoutParams();
-        count.width=ActionBar.LayoutParams.MATCH_PARENT;
+        count.width=100;
+        count.height= TableRow.LayoutParams.WRAP_CONTENT;
         count.leftMargin=30;
         table.setLayoutParams(count);
+
+
+
+        ///////// table heading end ////////////////////
+
+
         loadData();
     }
     public void loadData(){
+
 
         DBAdapter db=new DBAdapter(this);
         studentBeanList=db.getAllAttendance(SaveSharedPreference.getPrefSubject(ViewAttendance.this));
         int len=studentBeanList.size();
         int i=0;
         for(i=0;i<len;i++){
+
+            ///table rows//////////////////////
             AttendanceData arr=studentBeanList.get(i);
             TableRow tbrow=new TableRow(this);
 
@@ -148,7 +169,8 @@ public class ViewAttendance extends AppCompatActivity {
 ///////////-----dynamic text tiews ////////////////////////
 
             TableRow.LayoutParams name1= (TableRow.LayoutParams) tvData1.getLayoutParams();
-            name1.width=ActionBar.LayoutParams.MATCH_PARENT;
+            name1.height=ActionBar.LayoutParams.WRAP_CONTENT;
+            name1.width=130;
             name1.leftMargin=0;
             table.setLayoutParams(name1);
 

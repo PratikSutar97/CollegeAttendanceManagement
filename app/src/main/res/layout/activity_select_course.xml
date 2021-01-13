@@ -2,42 +2,102 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/clg"
     android:layout_height="match_parent"
+    android:background="@drawable/clg"
+    android:outlineProvider="paddedBounds"
     tools:context=".MainActivity">
 
 
     <TextView
-        android:id="@+id/t2"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Subject :"
+        android:text=""
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242" />
+        app:layout_constraintVertical_bias="0.053" />
 
     <Spinner
         android:id="@+id/spinnerSubject"
         android:layout_width="344dp"
         android:layout_height="60dp"
         android:background="#938787"
+        android:outlineProvider="background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.305" />
+        app:layout_constraintVertical_bias="0.295" />
+
+
+    <Button
+        android:id="@+id/btnDatePicker"
+        android:layout_width="170dp"
+        android:layout_height="61dp"
+        android:text="Select Date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.437" />
+
+    <TextView
+        android:id="@+id/viewDate"
+        android:layout_width="118dp"
+        android:layout_height="40dp"
+        android:background="#7E7F9C"
+        android:textAlignment="center"
+        android:textColor="#FDFDFD"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.795"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <Spinner
+        android:id="@+id/spinnerLecNo"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="#938787"
+        android:textAlignment="center"
+        android:tooltipText="Select Lecture Count"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#D0190505"
+        android:textAlignment="center"
+        android:textColor="#FA0000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.688" />
 
     <Button
         android:id="@+id/buttonaddstudent"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="228dp"
+        android:layout_marginEnd="220dp"
         android:background="#2C77C5"
         android:fontFamily="monospace"
         android:text="Proceed"
@@ -46,7 +106,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468" />
+        app:layout_constraintVertical_bias="0.783" />
+
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:background="#F44336"
+        android:fontFamily="monospace"
+        android:text="Cancel"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783" />
 
     <Button
         android:id="@+id/buttondeleAttend"
@@ -61,115 +137,62 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095" />
-
-    <Button
-        android:id="@+id/buttonCancel"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:background="#F44336"
-        android:fontFamily="monospace"
-        android:text="Cancel"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
-
-    <TextView
-        android:id="@+id/t3"
-        android:layout_width="358dp"
-        android:layout_height="58dp"
-        android:text="Today's Attendance for this subject is already taken!!"
-        android:textColor="#F44336"
-        android:textSize="20sp"
-        android:background="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.698"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fixed_layout"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/hidden_view"
+        android:layout_width="397dp"
+        android:layout_height="177dp"
+        android:background="#7A7382CF"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp">
-
-        <!--This is ImageButton for the expansion icon.-->
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/list_of_subjects"
+            android:id="@+id/moreoptiontextview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="More Options"
-            android:textColor="#A3FFFFFF"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#EBECEF"
             android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.892"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.071" />
+            app:layout_constraintVertical_bias="0.252" />
 
-        <ImageButton
-            android:id="@+id/arrow_button"
-            android:layout_width="66dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_launcher1_expand_arrow_foreground"
-            app:layout_constraintBottom_toBottomOf="@id/fixed_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.802"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list_of_subjects"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
-            android:background="#ffffff"
+            android:background="#2C77C5"
+            android:text="Yes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintVertical_bias="0.629"></Button>
 
-            <LinearLayout
-                android:id="@+id/hidden_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+        <Button
+            android:id="@+id/no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#F44336"
+            android:text="No"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.834"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.635" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Do you one more lecture ??"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
+        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                <Button
-                    android:id="@+id/yes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yes"></Button>
-
-                <Button
-                    android:id="@+id/no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No" />
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

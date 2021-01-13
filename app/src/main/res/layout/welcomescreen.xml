@@ -4,32 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6170333"
+    android:background="#C8041B8E"
     android:gravity="center">
 
 
     <ImageView
         android:id="@+id/logo_id"
-        android:layout_width="351dp"
-        android:layout_height="238dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="402dp"
+        android:layout_height="445dp"
+        android:layout_marginEnd="4dp"
         android:src="@drawable/attendance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.106" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="355dp"
+        android:layout_width="wrap_content"
         android:layout_height="74dp"
         android:layout_above="@+id/logo_id"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="184dp"
-        android:fontFamily="monospace"
+        android:layout_marginTop="168dp"
+        android:fontFamily="casual"
         android:text="Manage Attendance"
         android:textColor="#FDFCFC"
-        android:textSize="30dp"
+        android:textSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

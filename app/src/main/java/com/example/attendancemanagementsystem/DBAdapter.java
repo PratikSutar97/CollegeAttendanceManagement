@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import com.example.attendancemanagementsystem.Attendance.AttendanceData;
 import com.example.attendancemanagementsystem.Attendance.SelectCourse;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -274,7 +277,7 @@ public class DBAdapter extends SQLiteOpenHelper {
 
     public int deleteAttend(){
         SQLiteDatabase db=this.getWritableDatabase();
-        String query="delete from PYthon where lec_date='"+getDateTime()+"'";
+        String query="delete from PYthon where lec_date='12-1-2021 '";
         db.execSQL(query);
         return 0;
     }
@@ -308,9 +311,15 @@ public class DBAdapter extends SQLiteOpenHelper {
         }
         return  0;
     }
-    public int MscCaAttendance(AttendanceData attendanceData,String sub){
+    public int MscCaAttendance(AttendanceData attendanceData,String sub,String lec_count,String date){
         SQLiteDatabase db=this.getWritableDatabase();
-        String updateQuery="update '"+sub+"' set status='"+attendanceData.getStatus()+"' where student_firstname='"+attendanceData.getSfname()+"' and lec_date='"+getDateTime()+"' ";
+        String updateQuery;
+        if(lec_count.equals("")){
+            updateQuery="update '"+sub+"' set status='"+attendanceData.getStatus()+"' where student_firstname='"+attendanceData.getSfname()+"' and lec_date='"+getDateTime()+"' ";
+        }else{
+            updateQuery="update '"+sub+"' set status='"+attendanceData.getStatus()+"' where student_firstname='"+attendanceData.getSfname()+"' and lec_date='"+date+"' and lec_count='"+lec_count+"' ";
+        }
+
 
         try{
             db.execSQL(updateQuery);
@@ -319,6 +328,38 @@ public class DBAdapter extends SQLiteOpenHelper {
             Log.e("Attendacne Error","Attendance Error ---"+e);
             return 0;
         }
+    }
+
+    public ArrayList<AttendanceData> getDate(String course,String date){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        ArrayList<AttendanceData> arr=new ArrayList<>();
+
+        String query="select lec_date from '"+course+"' where lec_date='"+date+"' ";
+        Cursor cursor;
+        try {
+            cursor = db.rawQuery(query, null);
+
+            if(cursor.moveToNext()){
+                do{
+                    AttendanceData attendanceData=new AttendanceData();
+                    attendanceData.setDate(cursor.getString(0));
+                    arr.add(attendanceData);
+                }while (cursor.moveToNext());
+            }else{
+                Log.e("---error1","No Lecture On This Date !!");
+                return null;
+            }
+        }catch (Exception e){
+            Log.e("---error","No such Date "+e);
+            return null;
+        }
+
+        cursor.close();
+        if(cursor==null)
+            return null;
+        else
+            return arr;
     }
 
     public ArrayList<AttendanceData> getAllAttendance(String course){
@@ -356,7 +397,7 @@ public class DBAdapter extends SQLiteOpenHelper {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat(
 
-                "dd-MM-yyyy ", Locale.getDefault());
+                "d-M-yyyy", Locale.getDefault());
 
         Date date = new Date();
 

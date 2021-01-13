@@ -24,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class FacultyHome extends AppCompatActivity {
 
     FloatingActionButton fab;
-    Button logoutbutton, changePassbutton,buttongetStudentDetail,buttonTakeAttendance,btnViewAttendance;
+    Button logoutbutton, changePassbutton,editAttendance,buttonTakeAttendance,btnViewAttendance;
     String username,isLoggedIn;
     TextView t;
     SharedPreferences sharedpreferences;
@@ -40,7 +40,7 @@ public class FacultyHome extends AppCompatActivity {
         t=findViewById(R.id.username);
         logoutbutton.setVisibility(View.GONE);
         changePassbutton.setVisibility(View.GONE);
-        buttongetStudentDetail=findViewById(R.id.buttongetstudent);
+        editAttendance=findViewById(R.id.editAttendance);
         buttonTakeAttendance=findViewById(R.id.buttonTakeAttendance);
         btnViewAttendance=findViewById(R.id.viewAttendance);
         isAllFabsVisible = false;
@@ -84,13 +84,15 @@ public class FacultyHome extends AppCompatActivity {
             }
         });
 
-        buttongetStudentDetail.setOnClickListener(new View.OnClickListener() {
+        editAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(FacultyHome.this,ListStudentsByCourse.class);
-                startActivity(intent);
+                Intent i=new Intent(FacultyHome.this, SelectCourse.class);
+                startActivity(i);
+                SaveSharedPreference.setPREF_view_take_attendance(FacultyHome.this,"Edit Attendance");
             }
         });
+
 
         changePassbutton.setOnClickListener(new View.OnClickListener() {
             @Override

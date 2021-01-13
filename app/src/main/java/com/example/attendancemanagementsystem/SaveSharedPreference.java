@@ -13,11 +13,21 @@ public class SaveSharedPreference {
     static final String PREF_view_take_attendance="view_or_take_attendance";
     static final String PREF_one_more_lecture="take_ome_more_lecture";
     static final String PREF_lec_count="lec_count";
+    static final String PREF_LEC_DATE="lec_date";
 
     static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
+    public static void setPrefLecDate(Context ctx,String value){
+        SharedPreferences.Editor editor=getSharedPreferences(ctx).edit();
+        editor.putString(PREF_LEC_DATE,value);
+        editor.commit();
+    }
+
+    public static String getPrefLecDate(Context ctx){
+        return getSharedPreferences(ctx).getString(PREF_LEC_DATE,"");
+    }
     public static void setPREF_lec_count(Context ctx,String value){
         SharedPreferences.Editor editor=getSharedPreferences(ctx).edit();
         editor.putString(PREF_lec_count,value);

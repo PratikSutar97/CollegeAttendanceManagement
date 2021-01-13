@@ -3,8 +3,10 @@ package com.example.attendancemanagementsystem.Attendance;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +37,6 @@ public class MarkAttendance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_attendance);
 
-
-
         cancel=findViewById(R.id.buttonCancel);
         table=findViewById(R.id.table);
         dateView=findViewById(R.id.dateView);
@@ -44,7 +44,9 @@ public class MarkAttendance extends AppCompatActivity {
 
         subStr=SaveSharedPreference.getPrefSubject(this);
 
-        db.markAttendOnStart(subStr);
+        if(SaveSharedPreference.getPREF_lec_count(MarkAttendance.this).equals("")) {
+            db.markAttendOnStart(subStr);
+        }
 
         list=db.getStudentBySubject(subStr);
         listt=new String[list.size()];
@@ -59,9 +61,9 @@ public class MarkAttendance extends AppCompatActivity {
             }
         });
         loadData();
-
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public void loadData(){
         int i=0;
         LinearLayout constraintLayout=findViewById(R.id.scrollLinear);
@@ -74,7 +76,6 @@ public class MarkAttendance extends AppCompatActivity {
             constraintLayout.addView(btn);
 
             final int j=i;
-            //final DBAdapter db=new DBAdapter(MarkAttendance.this);
             final AttendanceData attendanceData=new AttendanceData();
             attendanceData.setSfname(listt[i]);
             final int finalI = i;
@@ -90,7 +91,13 @@ public class MarkAttendance extends AppCompatActivity {
 
                     btn.setBackgroundColor(Color.parseColor("#6825F48A"));
                     Toast.makeText(MarkAttendance.this,"--"+subStr,Toast.LENGTH_SHORT).show();
-                    int flag=db.MscCaAttendance(attendanceData,subStr);
+                    int flag=0;
+                    if(SaveSharedPreference.getPREF_lec_count(MarkAttendance.this).equals("")){
+                        flag=db.MscCaAttendance(attendanceData,subStr,"","");
+                    }else{
+                        flag=db.MscCaAttendance(attendanceData,subStr,SaveSharedPreference.getPREF_lec_count(MarkAttendance.this),SaveSharedPreference.getPrefLecDate(MarkAttendance.this));
+                    }
+
                     if(flag==1){
                         Toast.makeText(getApplicationContext(),"Attendance Marked",Toast.LENGTH_SHORT).show();
                     }else{
@@ -104,7 +111,13 @@ public class MarkAttendance extends AppCompatActivity {
                     btn.setTextColor(Color.WHITE);
                     btn.setText("Marked Absent <---------     "+listt[finalI]);
 
-                    int flag=db.MscCaAttendance(attendanceData,subStr)  ;
+                    int flag=0;
+                    if(SaveSharedPreference.getPREF_lec_count(MarkAttendance.this).equals("")){
+                        flag=db.MscCaAttendance(attendanceData,subStr,"","");
+                    }else{
+                        flag=db.MscCaAttendance(attendanceData,subStr,SaveSharedPreference.getPREF_lec_count(MarkAttendance.this),SaveSharedPreference.getPrefLecDate(MarkAttendance.this));
+                    }
+
                     if(flag==1){
                         Toast.makeText(getApplicationContext(),"Attendance Marked",Toast.LENGTH_SHORT).show();
                     }else{

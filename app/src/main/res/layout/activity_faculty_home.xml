@@ -26,17 +26,36 @@
         android:id="@+id/buttonTakeAttendance"
         android:layout_width="318dp"
         android:layout_height="54dp"
-
-        android:layout_below="@+id/buttongetstudent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="57dp"
-        android:layout_marginRight="57dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="219dp"
+        android:layout_marginEnd="42dp"
         android:background="@drawable/roundedbutton"
         android:text="Take Attendance" />
 
+    <Button
+        android:id="@+id/viewAttendance"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/buttonTakeAttendance"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="38dp"
+        android:background="@drawable/roundedbutton"
+        android:text="View Attendance" />
+
+
+    <Button
+        android:id="@+id/editAttendance"
+        android:layout_width="318dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/viewAttendance"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Edit Attendance" />
     <Button
         android:id="@+id/buttonlogout"
         android:layout_width="83dp"
@@ -58,56 +77,6 @@
         android:background="#AB31569F"
         android:text="Change Password"
         android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/buttongetstudent"
-        android:layout_width="318dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="250dp"
-        android:background="@drawable/roundedbutton"
-        android:text="Get Students By Course Name" />
-
-    <Button
-        android:id="@+id/buttongetstudent2"
-        android:layout_width="318dp"
-        android:layout_height="54dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="57dp"
-        android:background="@drawable/roundedbutton"
-        android:text="Get Students By Course Name" />
-
-    <Button
-        android:id="@+id/viewAttendance"
-        android:layout_width="318dp"
-        android:layout_height="54dp"
-        android:layout_below="@+id/buttonTakeAttendance"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="57dp"
-        android:background="@drawable/roundedbutton"
-        android:text="View Attendance" />
-
-    Spinner
-        android:id="@+id/spinnerCourse"
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginLeft="00dp"
-        android:layout_marginTop="181dp"
-        android:layout_marginEnd="89dp"
-        android:layout_marginBottom="510dp"
-        android:background="#938787" />
 
     <TextView
         android:id="@+id/username"
